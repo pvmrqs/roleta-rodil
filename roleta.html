@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rodeleta LoL 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #0a0a0c; /* Cor de fundo de reserva */
+            --box-bg: #111111;
+            --gold: #c8aa6e;
+            --gold-dim: #785a28;
+            --red-marker: #ff4d4d;
+            --text-color: #f0f0f0;
+        }
+
+        /* Reset básico para evitar erros de cálculo */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            /* --- ALTERAÇÃO DE FUNDO AQUI --- */
+            background-color: var(--bg-color); /* Cor de reserva caso a imagem não carregue */
+            
+            /* SUBSTITUA O LINK ABAIXO PELO CAMINHO DA SUA IMAGEM */
+            background-image: url(./fundo_site_links.jpg); 
+            
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Não repete a imagem */
+            background-attachment: fixed; /* O fundo fica fixo ao rolar a página (opcional) */
+            /* ------------------------------- */
+
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 3rem;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 5px 15px rgba(200, 170, 110, 0.2);
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 95%;
+            max-width: 1500px;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .player-section {
+            flex: 1;
+            background: var(--box-bg); /* Mantém o fundo escuro nos blocos para leitura */
+            padding: 25px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .center-section {
+            flex: 0.5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 80px;
+        }
+
+        /* --- Seleção de Rotas --- */
+        .role-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .role-input { display: none; }
+
+        .role-box {
+            width: 50px;
+            height: 50px;
+            background-color: #222;
+            border: 2px solid #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+            transition: 0.3s;
+            position: relative;
+        }
+        
+        .clickable { cursor: pointer; }
+
+        .role-box img {
+            width: 32px;
+            height: 32px;
+            filter: grayscale(100%);
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+
+        .role-input:checked + .role-box,
+        .active-highlight {
+            border-color: var(--gold) !important;
+            background-color: #1e1b15 !important;
+            box-shadow: 0 0 15px rgba(200, 170, 110, 0.4) !important;
+            transform: scale(1.1);
+        }
+
+        .role-input:checked + .role-box img,
+        .active-highlight img {
+            filter: grayscale(0%) !important;
+            opacity: 1 !important;
+        }
+
+        /* --- Roleta --- */
+        .roulette-wrapper {
+            width: 100%;
+            margin-top: 10px; 
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .roulette-container {
+            width: 100%;
+            height: 130px;
+            background-color: #000;
+            border: 2px solid #333;
+            position: relative;
+            overflow: hidden; 
+            box-shadow: inset 0 0 30px #000;
+            border-radius: 4px;
+        }
+
+        .roulette-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--red-marker);
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 0 15px var(--red-marker);
+        }
+
+        .roulette-strip {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            position: absolute;
+            left: 0;
+            will-change: transform;
+        }
+
+        .champ-card {
+            width: 90px;  
+            height: 90px;
+            margin: 0 5px; 
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #333; 
+            flex-shrink: 0;
+            background-color: #111;
+        }
+
+        /* Card de Desafio (Texto) */
+        .challenge-card {
+            width: 180px; 
+            height: 90px;
+            margin: 0 5px; 
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.85rem;
+            font-family: 'Roboto', sans-serif;
+            flex-shrink: 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* --- Botões --- */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .btn-gold {
+            background: linear-gradient(180deg, rgba(30,30,30,1) 0%, rgba(10,10,10,1) 100%);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 14px 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            width: 80%;
+        }
+
+        .btn-gold:hover:not(:disabled) {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 20px rgba(200, 170, 110, 0.4);
+        }
+
+        .btn-gold:disabled {
+            border-color: #444;
+            color: #555;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .result-name {
+            height: 35px;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+            text-align: center;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        h3 { color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; font-size: 0.9rem; }
+
+    </style>
+</head>
+<body>
+
+    <h1>Rodeleta</h1>
+
+    <div class="main-container">
+        
+        <div class="player-section">
+            <h3>Roleta 1</h3>
+            
+            <div class="role-selector" id="p1-role-container">
+                <div id="p1-Top" class="role-box"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png"></div>
+                <div id="p1-Jungle" class="role-box"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png"></div>
+                <div id="p1-Mid" class="role-box"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png"></div>
+                <div id="p1-ADC" class="role-box"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png"></div>
+                <div id="p1-Support" class="role-box"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png"></div>
+            </div>
+
+            <div class="btn-group" style="margin-bottom: 5px;">
+                <button class="btn-gold" id="btn-p1-lane" onclick="spinLaneP1()">Sortear Rota</button>
+            </div>
+
+            <div class="roulette-wrapper">
+                <div class="result-name" id="p1-result-name"></div>
+                <div class="roulette-container">
+                    <div class="roulette-line"></div>
+                    <div class="roulette-strip" id="p1-strip"></div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-gold" id="btn-p1-champ" onclick="spinChampionP1()" disabled>Sortear Campeão</button>
+            </div>
+        </div>
+
+        <div class="center-section">
+            <h3>Desafios</h3>
+            
+            <div class="result-name" id="challenge-result-name" style="height: 35px;"></div>
+
+            <div class="roulette-wrapper">
+                <div class="roulette-container">
+                    <div class="roulette-line"></div>
+                    <div class="roulette-strip" id="challenge-strip"></div>
+                </div>
+            </div>
+
+            <button class="btn-gold" id="btn-challenge" onclick="spinChallenge()">Sortear Desafio</button>
+        </div>
+
+        <div class="player-section">
+            <h3>Roleta 2</h3>
+            
+            <div class="role-selector">
+                <input type="radio" name="p2-role" id="p2-top" class="role-input" value="Top" checked onclick="updatePlayer2StaticStrip()">
+                <label for="p2-top" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png"></label>
+                
+                <input type="radio" name="p2-role" id="p2-jg" class="role-input" value="Jungle" onclick="updatePlayer2StaticStrip()">
+                <label for="p2-jg" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png"></label>
+                
+                <input type="radio" name="p2-role" id="p2-mid" class="role-input" value="Mid" onclick="updatePlayer2StaticStrip()">
+                <label for="p2-mid" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png"></label>
+                
+                <input type="radio" name="p2-role" id="p2-adc" class="role-input" value="ADC" onclick="updatePlayer2StaticStrip()">
+                <label for="p2-adc" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png"></label>
+                
+                <input type="radio" name="p2-role" id="p2-sup" class="role-input" value="Support" onclick="updatePlayer2StaticStrip()">
+                <label for="p2-sup" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png"></label>
+            </div>
+
+            <div class="btn-group" style="margin-bottom: 5px; opacity: 0; pointer-events: none;">
+                <button class="btn-gold">Spacer</button>
+            </div>
+
+            <div class="roulette-wrapper">
+                <div class="result-name" id="p2-result-name"></div>
+                <div class="roulette-container">
+                    <div class="roulette-line"></div>
+                    <div class="roulette-strip" id="p2-strip"></div>
+                </div>
+            </div>
+
+            <button class="btn-gold" onclick="spinPlayer2()">Sortear Campeão</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- DADOS ---
+        const championsDB = [
+            {id:'Aatrox',n:'Aatrox',r:['Top']}, {id:'Ahri',n:'Ahri',r:['Mid']}, {id:'Akali',n:'Akali',r:['Mid','Top']},
+            {id:'Akshan',n:'Akshan',r:['Mid','Top']}, {id:'Alistar',n:'Alistar',r:['Support']}, {id:'Ambessa',n:'Ambessa',r:['Top','Jungle']},
+            {id:'Amumu',n:'Amumu',r:['Jungle','Support']}, {id:'Anivia',n:'Anivia',r:['Mid']}, {id:'Annie',n:'Annie',r:['Mid','Support']},
+            {id:'Aphelios',n:'Aphelios',r:['ADC']}, {id:'Ashe',n:'Ashe',r:['ADC','Support']}, {id:'AurelionSol',n:'Aurelion Sol',r:['Mid']},
+            {id:'Aurora',n:'Aurora',r:['Mid','Top']}, {id:'Azir',n:'Azir',r:['Mid']}, {id:'Bard',n:'Bard',r:['Support']},
+            {id:'Belveth',n:'BelVeth',r:['Jungle']}, {id:'Blitzcrank',n:'Blitzcrank',r:['Support']}, {id:'Brand',n:'Brand',r:['Support','Jungle']},
+            {id:'Braum',n:'Braum',r:['Support']}, {id:'Briar',n:'Briar',r:['Jungle']}, {id:'Caitlyn',n:'Caitlyn',r:['ADC']},
+            {id:'Camille',n:'Camille',r:['Top','Support']}, {id:'Cassiopeia',n:'Cassiopeia',r:['Mid']}, {id:'Chogath',n:'ChoGath',r:['Top','Mid']},
+            {id:'Corki',n:'Corki',r:['Mid','ADC']}, {id:'Darius',n:'Darius',r:['Top']}, {id:'Diana',n:'Diana',r:['Jungle','Mid']},
+            {id:'DrMundo',n:'Dr. Mundo',r:['Top']}, {id:'Draven',n:'Draven',r:['ADC']}, {id:'Ekko',n:'Ekko',r:['Jungle','Mid']},
+            {id:'Elise',n:'Elise',r:['Jungle']}, {id:'Evelynn',n:'Evelynn',r:['Jungle']}, {id:'Ezreal',n:'Ezreal',r:['ADC']},
+            {id:'Fiddlesticks',n:'Fiddlesticks',r:['Jungle']}, {id:'Fiora',n:'Fiora',r:['Top']}, {id:'Fizz',n:'Fizz',r:['Mid']},
+            {id:'Galio',n:'Galio',r:['Mid','Support']}, {id:'Gangplank',n:'Gangplank',r:['Top']}, {id:'Garen',n:'Garen',r:['Top']},
+            {id:'Gnar',n:'Gnar',r:['Top']}, {id:'Gragas',n:'Gragas',r:['Jungle','Top']}, {id:'Graves',n:'Graves',r:['Jungle']},
+            {id:'Gwen',n:'Gwen',r:['Top']}, {id:'Hecarim',n:'Hecarim',r:['Jungle']}, {id:'Heimerdinger',n:'Heimerdinger',r:['Mid','Support']},
+            {id:'Hwei',n:'Hwei',r:['Mid','Support']}, {id:'Illaoi',n:'Illaoi',r:['Top']}, {id:'Irelia',n:'Irelia',r:['Top','Mid']},
+            {id:'Ivern',n:'Ivern',r:['Jungle']}, {id:'Janna',n:'Janna',r:['Support']}, {id:'JarvanIV',n:'Jarvan IV',r:['Jungle']},
+            {id:'Jax',n:'Jax',r:['Top','Jungle']}, {id:'Jayce',n:'Jayce',r:['Top','Mid']}, {id:'Jhin',n:'Jhin',r:['ADC']},
+            {id:'Jinx',n:'Jinx',r:['ADC']}, {id:'KSante',n:'KSante',r:['Top']}, {id:'Kaisa',n:'KaiSa',r:['ADC']},
+            {id:'Kalista',n:'Kalista',r:['ADC']}, {id:'Karma',n:'Karma',r:['Support','Mid']}, {id:'Karthus',n:'Karthus',r:['Jungle','ADC']},
+            {id:'Kassadin',n:'Kassadin',r:['Mid']}, {id:'Katarina',n:'Katarina',r:['Mid']}, {id:'Kayle',n:'Kayle',r:['Top']},
+            {id:'Kayn',n:'Kayn',r:['Jungle']}, {id:'Kennen',n:'Kennen',r:['Top']}, {id:'Khazix',n:'KhaZix',r:['Jungle']},
+            {id:'Kindred',n:'Kindred',r:['Jungle']}, {id:'Kled',n:'Kled',r:['Top']}, {id:'KogMaw',n:'KogMaw',r:['ADC']},
+            {id:'Leblanc',n:'LeBlanc',r:['Mid']}, {id:'LeeSin',n:'Lee Sin',r:['Jungle']}, {id:'Leona',n:'Leona',r:['Support']},
+            {id:'Lillia',n:'Lillia',r:['Jungle']}, {id:'Lissandra',n:'Lissandra',r:['Mid']}, {id:'Lucian',n:'Lucian',r:['ADC']},
+            {id:'Lulu',n:'Lulu',r:['Support']}, {id:'Lux',n:'Lux',r:['Support','Mid']}, {id:'Malphite',n:'Malphite',r:['Top','Support']},
+            {id:'Malzahar',n:'Malzahar',r:['Mid']}, {id:'Maokai',n:'Maokai',r:['Support','Top']}, {id:'MasterYi',n:'Master Yi',r:['Jungle']},
+            {id:'Mel',n:'Mel',r:['Support','Mid']}, {id:'Milio',n:'Milio',r:['Support']}, {id:'MissFortune',n:'Miss Fortune',r:['ADC']},
+            {id:'Mordekaiser',n:'Mordekaiser',r:['Top']}, {id:'Morgana',n:'Morgana',r:['Support','Mid']}, {id:'Naafiri',n:'Naafiri',r:['Mid','Top']},
+            {id:'Nami',n:'Nami',r:['Support']}, {id:'Nasus',n:'Nasus',r:['Top']}, {id:'Nautilus',n:'Nautilus',r:['Support']},
+            {id:'Neeko',n:'Neeko',r:['Mid','Support']}, {id:'Nidalee',n:'Nidalee',r:['Jungle']}, {id:'Nilah',n:'Nilah',r:['ADC']},
+            {id:'Nocturne',n:'Nocturne',r:['Jungle']}, {id:'Nunu',n:'Nunu & Willump',r:['Jungle']}, {id:'Olaf',n:'Olaf',r:['Jungle','Top']},
+            {id:'Orianna',n:'Orianna',r:['Mid']}, {id:'Ornn',n:'Ornn',r:['Top']}, {id:'Pantheon',n:'Pantheon',r:['Top','Support']},
+            {id:'Poppy',n:'Poppy',r:['Top','Jungle']}, {id:'Pyke',n:'Pyke',r:['Support']}, {id:'Qiyana',n:'Qiyana',r:['Mid']},
+            {id:'Quinn',n:'Quinn',r:['Top']}, {id:'Rakan',n:'Rakan',r:['Support']}, {id:'Rammus',n:'Rammus',r:['Jungle']},
+            {id:'RekSai',n:'RekSai',r:['Jungle']}, {id:'Rell',n:'Rell',r:['Support']}, {id:'Renata',n:'Renata Glasc',r:['Support']},
+            {id:'Renekton',n:'Renekton',r:['Top']}, {id:'Rengar',n:'Rengar',r:['Jungle','Top']}, {id:'Riven',n:'Riven',r:['Top']},
+            {id:'Rumble',n:'Rumble',r:['Top','Mid']}, {id:'Ryze',n:'Ryze',r:['Mid','Top']}, {id:'Samira',n:'Samira',r:['ADC']},
+            {id:'Sejuani',n:'Sejuani',r:['Jungle']}, {id:'Senna',n:'Senna',r:['Support','ADC']}, {id:'Seraphine',n:'Seraphine',r:['Support','Mid']},
+            {id:'Sett',n:'Sett',r:['Top','Support']}, {id:'Shaco',n:'Shaco',r:['Jungle','Support']}, {id:'Shen',n:'Shen',r:['Top','Support']},
+            {id:'Shyvana',n:'Shyvana',r:['Jungle']}, {id:'Singed',n:'Singed',r:['Top']}, {id:'Sion',n:'Sion',r:['Top']},
+            {id:'Sivir',n:'Sivir',r:['ADC']}, {id:'Skarner',n:'Skarner',r:['Jungle']}, {id:'Smolder',n:'Smolder',r:['ADC']},
+            {id:'Sona',n:'Sona',r:['Support']}, {id:'Soraka',n:'Soraka',r:['Support']}, {id:'Swain',n:'Swain',r:['Support','Mid']},
+            {id:'Sylas',n:'Sylas',r:['Mid','Top']}, {id:'Syndra',n:'Syndra',r:['Mid']}, {id:'TahmKench',n:'Tahm Kench',r:['Support','Top']},
+            {id:'Taliyah',n:'Taliyah',r:['Jungle','Mid']}, {id:'Talon',n:'Talon',r:['Mid','Jungle']}, {id:'Taric',n:'Taric',r:['Support']},
+            {id:'Teemo',n:'Teemo',r:['Top']}, {id:'Thresh',n:'Thresh',r:['Support']}, {id:'Tristana',n:'Tristana',r:['ADC','Mid']},
+            {id:'Trundle',n:'Trundle',r:['Jungle','Top']}, {id:'Tryndamere',n:'Tryndamere',r:['Top']}, {id:'TwistedFate',n:'Twisted Fate',r:['Mid']},
+            {id:'Twitch',n:'Twitch',r:['ADC','Support']}, {id:'Udyr',n:'Udyr',r:['Jungle']}, {id:'Urgot',n:'Urgot',r:['Top']},
+            {id:'Varus',n:'Varus',r:['ADC','Mid']}, {id:'Vayne',n:'Vayne',r:['ADC','Top']}, {id:'Veigar',n:'Veigar',r:['Mid','Support']},
+            {id:'Velkoz',n:'VelKoz',r:['Support','Mid']}, {id:'Vex',n:'Vex',r:['Mid']}, {id:'Vi',n:'Vi',r:['Jungle']},
+            {id:'Viego',n:'Viego',r:['Jungle']}, {id:'Viktor',n:'Viktor',r:['Mid']}, {id:'Vladimir',n:'Vladimir',r:['Mid','Top']},
+            {id:'Volibear',n:'Volibear',r:['Top','Jungle']}, {id:'Warwick',n:'Warwick',r:['Jungle','Top']}, {id:'Wukong',n:'MonkeyKing',r:['Jungle','Top']},
+            {id:'Xayah',n:'Xayah',r:['ADC']}, {id:'Xerath',n:'Xerath',r:['Support','Mid']}, {id:'XinZhao',n:'Xin Zhao',r:['Jungle']},
+            {id:'Yasuo',n:'Yasuo',r:['Mid','Top']}, {id:'Yone',n:'Yone',r:['Mid','Top']}, {id:'Yorick',n:'Yorick',r:['Top']},
+            {id:'Yuumi',n:'Yuumi',r:['Support']}, {id:'Yunara',n:'Yunara',r:['Mid']}, {id:'Zac',n:'Zac',r:['Jungle']},
+            {id:'Zed',n:'Zed',r:['Mid']}, {id:'Zeri',n:'Zeri',r:['ADC']}, {id:'Ziggs',n:'Ziggs',r:['Mid','ADC']},
+            {id:'Zilean',n:'Zilean',r:['Support','Mid']}, {id:'Zoe',n:'Zoe',r:['Mid']}, {id:'Zyra',n:'Zyra',r:['Support']}
+        ];
+
+        const challenges = [
+            "Jogar sem Flash", "Build Invertida (AP/AD)", "Invadir a Jungle Nv 1", 
+            "Não pode comprar botas antes dos 15 min", "Mítico/Core Item errado de propósito",
+            "Jogar com a tela bloqueada", "Focar apenas o suporte nas TFs", 
+            "Não pode usar a Ultimate nos primeiros 10 min", "Build full Attack Speed", 
+            "Só pode voltar base se morrer", "Trocar de lane com o aliado aos 10 min",
+            "Jogar sem som", "Flash no lugar do D (ou F, o que você não usa)",
+            "Jogar sem usar Pings", "Build Tank independente do champ", "Fazer item de suporte",
+            "Jogar com uma mão por 1 min", "Não pode usar skills no Nv 1"
+        ];
+
+        function getChampionImage(id) {
+            let cleanId = id.replace(/ /g, '').replace(/'/g, '').replace(/\./g, '');
+            if(cleanId === 'RenataGlasc') cleanId = 'Renata';
+            if(cleanId === 'Nunu&Willump') cleanId = 'Nunu';
+            if(cleanId === 'BelVeth') cleanId = 'Belveth';
+            return `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${cleanId}.png`;
+        }
+
+        let p1SelectedRole = null; 
+
+        // --- FUNÇÕES DE ANIMAÇÃO ---
+
+        // 1. Campeões (A-Z na fita)
+        function runRouletteAnimation(playerPrefix, winnerChamp, sortedPool) {
+            const strip = document.getElementById(`${playerPrefix}-strip`);
+            const nameDisplay = document.getElementById(`${playerPrefix}-result-name`);
+            
+            const totalVisualItems = 80; 
+            const winnerVisualIndex = 65; 
+            
+            const winnerIndexInPool = sortedPool.findIndex(c => c.id === winnerChamp.id);
+            
+            let rouletteItems = [];
+            for (let i = 0; i < totalVisualItems; i++) {
+                const distance = i - winnerVisualIndex;
+                let targetIndex = (winnerIndexInPool + distance) % sortedPool.length;
+                if (targetIndex < 0) targetIndex += sortedPool.length;
+                rouletteItems.push(sortedPool[targetIndex]);
+            }
+
+            strip.innerHTML = '';
+            strip.style.transition = 'none';
+            strip.style.transform = 'translateX(0px)';
+
+            rouletteItems.forEach(champ => {
+                const div = document.createElement('div');
+                div.className = 'champ-card';
+                div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
+                div.onerror = function() { this.style.backgroundColor = '#333'; this.innerText = '?'; };
+                strip.appendChild(div);
+            });
+
+            nameDisplay.innerText = "...";
+            nameDisplay.style.color = "var(--gold)";
+            nameDisplay.style.textShadow = "none";
+
+            // Calculo da largura do CARD DE CAMPEÃO (agora com box-sizing: border-box)
+            // width: 90px + margin: 10px = 100px.
+            const cardWidth = 100; 
+            
+            const containerWidth = strip.parentElement.offsetWidth;
+            const centerOffset = (containerWidth / 2) - (cardWidth / 2);
+            const randomOffset = Math.floor(Math.random() * 20) - 10; 
+            const finalPosition = -((winnerVisualIndex * cardWidth) - centerOffset + randomOffset);
+
+            strip.offsetHeight; 
+
+            setTimeout(() => {
+                strip.style.transition = 'transform 5s cubic-bezier(0.1, 0.8, 0.1, 1)'; 
+                strip.style.transform = `translateX(${finalPosition}px)`;
+            }, 50);
+
+            setTimeout(() => {
+                const roleText = (playerPrefix === 'p1' && p1SelectedRole) ? p1SelectedRole : winnerChamp.r[0];
+                nameDisplay.innerText = `${winnerChamp.n} (${roleText})`;
+                nameDisplay.style.color = "#fff";
+                nameDisplay.style.textShadow = "0 0 15px var(--gold)";
+                setTimeout(() => {
+                    nameDisplay.style.color = "var(--gold)";
+                    nameDisplay.style.textShadow = "none";
+                }, 500);
+            }, 5000);
+        }
+
+        // 2. Desafios (Texto na fita)
+        function spinChallenge() {
+            const strip = document.getElementById('challenge-strip');
+            const nameDisplay = document.getElementById('challenge-result-name');
+            const btn = document.getElementById('btn-challenge');
+
+            btn.disabled = true;
+            
+            // Sorteia vencedor
+            const winnerText = challenges[Math.floor(Math.random() * challenges.length)];
+            const winnerIndexInArr = challenges.indexOf(winnerText);
+
+            const totalVisualItems = 50; 
+            const winnerVisualIndex = 40; 
+
+            let rouletteItems = [];
+            for (let i = 0; i < totalVisualItems; i++) {
+                const distance = i - winnerVisualIndex;
+                let targetIndex = (winnerIndexInArr + distance) % challenges.length;
+                if (targetIndex < 0) targetIndex += challenges.length;
+                rouletteItems.push(challenges[targetIndex]);
+            }
+
+            strip.innerHTML = '';
+            strip.style.transition = 'none';
+            strip.style.transform = 'translateX(0px)';
+
+            rouletteItems.forEach(text => {
+                const div = document.createElement('div');
+                div.className = 'challenge-card';
+                div.innerText = text;
+                strip.appendChild(div);
+            });
+
+            nameDisplay.innerText = "...";
+            nameDisplay.style.color = "var(--gold)";
+
+            // CÁLCULO CORRIGIDO PARA DESAFIO
+            // width: 180 + margin: 10 = 190px (por causa do border-box)
+            const cardWidth = 190; 
+            
+            const containerWidth = strip.parentElement.offsetWidth;
+            const centerOffset = (containerWidth / 2) - (cardWidth / 2);
+            const randomOffset = Math.floor(Math.random() * 10) - 5; 
+            const finalPosition = -((winnerVisualIndex * cardWidth) - centerOffset + randomOffset);
+
+            strip.offsetHeight; 
+
+            setTimeout(() => {
+                strip.style.transition = 'transform 4s cubic-bezier(0.1, 0.8, 0.1, 1)'; 
+                strip.style.transform = `translateX(${finalPosition}px)`;
+            }, 50);
+
+            setTimeout(() => {
+                nameDisplay.innerText = winnerText;
+                nameDisplay.style.color = "#fff";
+                btn.disabled = false;
+            }, 4000);
+        }
+
+
+        // --- FUNÇÕES DE CONTROLE ---
+
+        // ROLETA 1
+        function spinLaneP1() {
+            const roles = ['Top', 'Jungle', 'Mid', 'ADC', 'Support'];
+            const winnerRole = roles[Math.floor(Math.random() * roles.length)];
+            
+            document.getElementById('btn-p1-lane').disabled = true;
+            document.getElementById('btn-p1-champ').disabled = true;
+            document.getElementById('p1-result-name').innerText = "";
+
+            const totalCycles = 3; 
+            const intervalSpeed = 100;
+            const container = document.getElementById('p1-role-container');
+            roles.forEach(r => document.getElementById(`p1-${r}`).classList.remove('active-highlight'));
+
+            let currentIndex = 0;
+            let currentCycle = 0;
+
+            const interval = setInterval(() => {
+                const prevIndex = (currentIndex === 0) ? 4 : currentIndex - 1;
+                document.getElementById(`p1-${roles[prevIndex]}`).classList.remove('active-highlight');
+
+                const currentRoleName = roles[currentIndex];
+                document.getElementById(`p1-${currentRoleName}`).classList.add('active-highlight');
+
+                if (currentCycle >= totalCycles && currentRoleName === winnerRole) {
+                    clearInterval(interval);
+                    document.getElementById(`p1-${winnerRole}`).classList.add('active-highlight');
+                    p1SelectedRole = winnerRole;
+                    
+                    document.getElementById('btn-p1-lane').disabled = false;
+                    document.getElementById('btn-p1-champ').disabled = false;
+                    document.getElementById('btn-p1-champ').innerText = `Sortear Campeão`;
+                } else {
+                    currentIndex++;
+                    if (currentIndex >= roles.length) {
+                        currentIndex = 0;
+                        currentCycle++;
+                    }
+                }
+            }, intervalSpeed);
+        }
+
+        function spinChampionP1() {
+            if (!p1SelectedRole) {
+                alert("Sorteie a rota primeiro!");
+                return;
+            }
+            const winner = championsDB[Math.floor(Math.random() * championsDB.length)];
+            runRouletteAnimation('p1', winner, championsDB);
+        }
+
+        // ROLETA 2
+        function spinPlayer2() {
+            const selectedRadio = document.querySelector('input[name="p2-role"]:checked');
+            if(!selectedRadio) return;
+
+            const selectedRole = selectedRadio.value;
+            
+            let pool = championsDB.filter(champ => champ.r.includes(selectedRole));
+            if(pool.length === 0) pool = championsDB;
+            
+            const winner = pool[Math.floor(Math.random() * pool.length)];
+            runRouletteAnimation('p2', winner, pool);
+        }
+
+        function updatePlayer2StaticStrip() {
+            const selectedRadio = document.querySelector('input[name="p2-role"]:checked');
+            if(!selectedRadio) return;
+            
+            const role = selectedRadio.value;
+            const strip = document.getElementById('p2-strip');
+            const nameDisplay = document.getElementById('p2-result-name');
+
+            nameDisplay.innerText = "";
+            let pool = championsDB.filter(champ => champ.r.includes(role));
+            if (pool.length === 0) return;
+
+            strip.innerHTML = '';
+            strip.style.transition = 'none';
+            strip.style.transform = 'translateX(0px)';
+
+            for(let i=0; i<15; i++) {
+                const champ = pool[i % pool.length];
+                const div = document.createElement('div');
+                div.className = 'champ-card';
+                div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
+                strip.appendChild(div);
+            }
+        }
+
+        function initStaticStripP1() {
+            const strip = document.getElementById('p1-strip');
+            for(let i=0; i<15; i++) {
+                const champ = championsDB[i];
+                const div = document.createElement('div');
+                div.className = 'champ-card';
+                div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
+                strip.appendChild(div);
+            }
+        }
+
+        function initStaticChallenge() {
+            const strip = document.getElementById('challenge-strip');
+            for(let i=0; i<10; i++) {
+                const text = challenges[i % challenges.length];
+                const div = document.createElement('div');
+                div.className = 'challenge-card';
+                div.innerText = text;
+                strip.appendChild(div);
+            }
+        }
+
+        window.onload = () => {
+            initStaticStripP1(); 
+            updatePlayer2StaticStrip();
+            initStaticChallenge();
+        };
+
+    </script>
+</body>
+</html>
