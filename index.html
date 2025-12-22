@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
         :root {
-            --bg-color: #0a0a0c; /* Cor de fundo de reserva */
+            --bg-color: #0a0a0c;
             --box-bg: #111111;
             --gold: #c8aa6e;
             --gold-dim: #785a28;
@@ -16,24 +16,20 @@
             --text-color: #f0f0f0;
         }
 
-        /* Reset básico para evitar erros de cálculo */
+        /* Reset básico */
         * {
             box-sizing: border-box;
         }
 
         body {
-            /* --- ALTERAÇÃO DE FUNDO AQUI --- */
-            background-color: var(--bg-color); /* Cor de reserva caso a imagem não carregue */
+            background-color: var(--bg-color);
+            /* Substitua pelo nome da sua imagem */
+            background-image: url('fundo_site_links.jpg'); 
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             
-            /* SUBSTITUA O LINK ABAIXO PELO CAMINHO DA SUA IMAGEM */
-            background-image: url(./fundo_site_links.jpg); 
-            
-            background-size: cover; /* Faz a imagem cobrir toda a tela */
-            background-position: center center; /* Centraliza a imagem */
-            background-repeat: no-repeat; /* Não repete a imagem */
-            background-attachment: fixed; /* O fundo fica fixo ao rolar a página (opcional) */
-            /* ------------------------------- */
-
             color: var(--text-color);
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -66,7 +62,7 @@
 
         .player-section {
             flex: 1;
-            background: var(--box-bg); /* Mantém o fundo escuro nos blocos para leitura */
+            background: var(--box-bg);
             padding: 25px;
             border: 1px solid #333;
             border-radius: 12px;
@@ -118,6 +114,7 @@
             transition: 0.3s;
         }
 
+        /* Estilo para quando está selecionado */
         .role-input:checked + .role-box,
         .active-highlight {
             border-color: var(--gold) !important;
@@ -264,7 +261,7 @@
 </head>
 <body>
 
-    <h1>Rodeleta</h1>
+    <h1>Rodeleta 2025</h1>
 
     <div class="main-container">
         
@@ -314,20 +311,20 @@
         <div class="player-section">
             <h3>Roleta 2</h3>
             
-            <div class="role-selector">
-                <input type="radio" name="p2-role" id="p2-top" class="role-input" value="Top" checked onclick="updatePlayer2StaticStrip()">
+            <div class="role-selector" id="p2-roles">
+                <input type="checkbox" id="p2-top" class="role-input" value="Top" checked onclick="updatePlayer2StaticStrip()">
                 <label for="p2-top" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-top.png"></label>
                 
-                <input type="radio" name="p2-role" id="p2-jg" class="role-input" value="Jungle" onclick="updatePlayer2StaticStrip()">
+                <input type="checkbox" id="p2-jg" class="role-input" value="Jungle" onclick="updatePlayer2StaticStrip()">
                 <label for="p2-jg" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-jungle.png"></label>
                 
-                <input type="radio" name="p2-role" id="p2-mid" class="role-input" value="Mid" onclick="updatePlayer2StaticStrip()">
+                <input type="checkbox" id="p2-mid" class="role-input" value="Mid" onclick="updatePlayer2StaticStrip()">
                 <label for="p2-mid" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-middle.png"></label>
                 
-                <input type="radio" name="p2-role" id="p2-adc" class="role-input" value="ADC" onclick="updatePlayer2StaticStrip()">
+                <input type="checkbox" id="p2-adc" class="role-input" value="ADC" onclick="updatePlayer2StaticStrip()">
                 <label for="p2-adc" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-bottom.png"></label>
                 
-                <input type="radio" name="p2-role" id="p2-sup" class="role-input" value="Support" onclick="updatePlayer2StaticStrip()">
+                <input type="checkbox" id="p2-sup" class="role-input" value="Support" onclick="updatePlayer2StaticStrip()">
                 <label for="p2-sup" class="role-box clickable"><img src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-clash/global/default/assets/images/position-selector/positions/icon-position-utility.png"></label>
             </div>
 
@@ -468,7 +465,6 @@
             nameDisplay.style.textShadow = "none";
 
             // Calculo da largura do CARD DE CAMPEÃO (agora com box-sizing: border-box)
-            // width: 90px + margin: 10px = 100px.
             const cardWidth = 100; 
             
             const containerWidth = strip.parentElement.offsetWidth;
@@ -503,7 +499,6 @@
 
             btn.disabled = true;
             
-            // Sorteia vencedor
             const winnerText = challenges[Math.floor(Math.random() * challenges.length)];
             const winnerIndexInArr = challenges.indexOf(winnerText);
 
@@ -532,8 +527,7 @@
             nameDisplay.innerText = "...";
             nameDisplay.style.color = "var(--gold)";
 
-            // CÁLCULO CORRIGIDO PARA DESAFIO
-            // width: 180 + margin: 10 = 190px (por causa do border-box)
+            // Card Width 180 + margin 10 = 190 (border-box now applied)
             const cardWidth = 190; 
             
             const containerWidth = strip.parentElement.offsetWidth;
@@ -609,30 +603,51 @@
             runRouletteAnimation('p1', winner, championsDB);
         }
 
-        // ROLETA 2
+        // ROLETA 2 - MULTIPLAS ROTAS
         function spinPlayer2() {
-            const selectedRadio = document.querySelector('input[name="p2-role"]:checked');
-            if(!selectedRadio) return;
+            // Pega todos os checkboxes marcados
+            const checkboxes = document.querySelectorAll('#p2-roles .role-input:checked');
+            const selectedRoles = Array.from(checkboxes).map(cb => cb.value);
 
-            const selectedRole = selectedRadio.value;
+            if (selectedRoles.length === 0) {
+                alert("Selecione pelo menos uma rota!");
+                return;
+            }
             
-            let pool = championsDB.filter(champ => champ.r.includes(selectedRole));
+            // Filtra o banco: Se o campeão tem ALGUMA das rotas selecionadas
+            let pool = championsDB.filter(champ => 
+                champ.r.some(role => selectedRoles.includes(role))
+            );
+
+            // Se nada for encontrado (improvável), usa tudo
             if(pool.length === 0) pool = championsDB;
             
             const winner = pool[Math.floor(Math.random() * pool.length)];
+            
+            // Roda a animação com a pool filtrada (que mantém ordem A-Z do DB)
             runRouletteAnimation('p2', winner, pool);
         }
 
         function updatePlayer2StaticStrip() {
-            const selectedRadio = document.querySelector('input[name="p2-role"]:checked');
-            if(!selectedRadio) return;
+            const checkboxes = document.querySelectorAll('#p2-roles .role-input:checked');
+            const selectedRoles = Array.from(checkboxes).map(cb => cb.value);
             
-            const role = selectedRadio.value;
             const strip = document.getElementById('p2-strip');
             const nameDisplay = document.getElementById('p2-result-name');
 
             nameDisplay.innerText = "";
-            let pool = championsDB.filter(champ => champ.r.includes(role));
+            
+            // Se nenhuma rota selecionada, limpa a fita
+            if (selectedRoles.length === 0) {
+                strip.innerHTML = '';
+                return;
+            }
+
+            // Filtro Multi-Rotas
+            let pool = championsDB.filter(champ => 
+                champ.r.some(role => selectedRoles.includes(role))
+            );
+
             if (pool.length === 0) return;
 
             strip.innerHTML = '';
