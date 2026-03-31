@@ -460,15 +460,22 @@
             initStaticChallenge();
         }
     }
-
-    // --- FUNÇÃO DE IMAGEM ATUALIZADA ---
+    // --- FUNÇÃO DE IMAGEM ATUALIZADA (CORREÇÃO WUKONG) ---
     function getChampionImage(id) {
+        // Remove espaços, apóstrofos e pontos do ID
         let cleanId = id.replace(/ /g, '').replace(/'/g, '').replace(/\./g, '');
+        
+        // --- TRATAMENTOS ESPECÍFICOS DA RIOT ---
+        
+        // 1. A correção do Wukong: A Riot chama a imagem dele de 'MonkeyKing'
+        if(cleanId === 'Wukong') cleanId = 'MonkeyKing'; 
+
+        // 2. Outras correções necessárias para garantir que as fotos apareçam
         if(cleanId === 'RenataGlasc') cleanId = 'Renata';
         if(cleanId === 'Nunu&Willump') cleanId = 'Nunu';
         if(cleanId === 'BelVeth') cleanId = 'Belveth';
         
-        // Agora usa a variável `latestPatch` no link!
+        // Retorna a URL final usando o patch atualizado automaticamente
         return `https://ddragon.leagueoflegends.com/cdn/${latestPatch}/img/champion/${cleanId}.png`;
     }
 
