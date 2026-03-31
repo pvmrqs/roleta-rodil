@@ -367,350 +367,364 @@
 
     <script>
         // --- DADOS ---
-        const championsDB = [
-            {id:'Aatrox',n:'Aatrox',r:['Top']}, {id:'Ahri',n:'Ahri',r:['Mid']}, {id:'Akali',n:'Akali',r:['Mid','Top']},
-            {id:'Akshan',n:'Akshan',r:['Mid']}, {id:'Alistar',n:'Alistar',r:['Support']}, {id:'Ambessa',n:'Ambessa',r:['Top','Jungle']},
-            {id:'Amumu',n:'Amumu',r:['Jungle']}, {id:'Anivia',n:'Anivia',r:['Mid']}, {id:'Annie',n:'Annie',r:['Mid',]},
-            {id:'Aphelios',n:'Aphelios',r:['ADC']}, {id:'Ashe',n:'Ashe',r:['ADC',]}, {id:'AurelionSol',n:'Aurelion Sol',r:['Mid']},
-            {id:'Aurora',n:'Aurora',r:['Mid']}, {id:'Azir',n:'Azir',r:['Mid']}, {id:'Bard',n:'Bard',r:['Support']},
-            {id:'Belveth',n:'BelVeth',r:['Jungle']}, {id:'Blitzcrank',n:'Blitzcrank',r:['Support']}, {id:'Brand',n:'Brand',r:['Support']},
-            {id:'Braum',n:'Braum',r:['Support']}, {id:'Briar',n:'Briar',r:['Jungle']}, {id:'Caitlyn',n:'Caitlyn',r:['ADC']},
-            {id:'Camille',n:'Camille',r:['Top',]}, {id:'Cassiopeia',n:'Cassiopeia',r:['Mid']}, {id:'Chogath',n:'ChoGath',r:['Top']},
-            {id:'Corki',n:'Corki',r:['Mid','ADC']}, {id:'Darius',n:'Darius',r:['Top']}, {id:'Diana',n:'Diana',r:['Jungle','Mid']},
-            {id:'DrMundo',n:'Dr. Mundo',r:['Top','Jungle']}, {id:'Draven',n:'Draven',r:['ADC']}, {id:'Ekko',n:'Ekko',r:['Jungle','Mid']},
-            {id:'Elise',n:'Elise',r:['Jungle']}, {id:'Evelynn',n:'Evelynn',r:['Jungle']}, {id:'Ezreal',n:'Ezreal',r:['ADC']},
-            {id:'Fiddlesticks',n:'Fiddlesticks',r:['Jungle']}, {id:'Fiora',n:'Fiora',r:['Top']}, {id:'Fizz',n:'Fizz',r:['Mid']},
-            {id:'Galio',n:'Galio',r:['Mid',]}, {id:'Gangplank',n:'Gangplank',r:['Top']}, {id:'Garen',n:'Garen',r:['Top']},
-            {id:'Gnar',n:'Gnar',r:['Top']}, {id:'Gragas',n:'Gragas',r:['Top']}, {id:'Graves',n:'Graves',r:['Jungle']},
-            {id:'Gwen',n:'Gwen',r:['Top']}, {id:'Hecarim',n:'Hecarim',r:['Jungle']}, {id:'Heimerdinger',n:'Heimerdinger',r:['Mid','Top']},
-            {id:'Hwei',n:'Hwei',r:['Mid','Support']}, {id:'Illaoi',n:'Illaoi',r:['Top']}, {id:'Irelia',n:'Irelia',r:['Top','Mid']},
-            {id:'Ivern',n:'Ivern',r:['Jungle']}, {id:'Janna',n:'Janna',r:['Support']}, {id:'JarvanIV',n:'Jarvan IV',r:['Jungle']},
-            {id:'Jax',n:'Jax',r:['Top','Jungle']}, {id:'Jayce',n:'Jayce',r:['Top']}, {id:'Jhin',n:'Jhin',r:['ADC']},
-            {id:'Jinx',n:'Jinx',r:['ADC']}, {id:'KSante',n:'KSante',r:['Top']}, {id:'Kaisa',n:'KaiSa',r:['ADC']},
-            {id:'Kalista',n:'Kalista',r:['ADC']}, {id:'Karma',n:'Karma',r:['Support','Mid']}, {id:'Karthus',n:'Karthus',r:['Jungle']},
-            {id:'Kassadin',n:'Kassadin',r:['Mid']}, {id:'Katarina',n:'Katarina',r:['Mid']}, {id:'Kayle',n:'Kayle',r:['Top']},
-            {id:'Kayn',n:'Kayn',r:['Jungle']}, {id:'Kennen',n:'Kennen',r:['Top']}, {id:'Khazix',n:'KhaZix',r:['Jungle']},
-            {id:'Kindred',n:'Kindred',r:['Jungle']}, {id:'Kled',n:'Kled',r:['Top']}, {id:'KogMaw',n:'KogMaw',r:['ADC']},
-            {id:'Leblanc',n:'LeBlanc',r:['Mid']}, {id:'LeeSin',n:'Lee Sin',r:['Jungle']}, {id:'Leona',n:'Leona',r:['Support']},
-            {id:'Lillia',n:'Lillia',r:['Jungle']}, {id:'Lissandra',n:'Lissandra',r:['Mid']}, {id:'Lucian',n:'Lucian',r:['ADC']},
-            {id:'Lulu',n:'Lulu',r:['Support']}, {id:'Lux',n:'Lux',r:['Support','Mid']}, {id:'Malphite',n:'Malphite',r:['Top','Jungle']},
-            {id:'Malzahar',n:'Malzahar',r:['Mid']}, {id:'Maokai',n:'Maokai',r:['Support']}, {id:'MasterYi',n:'Master Yi',r:['Jungle']},
-            {id:'Mel',n:'Mel',r:['Support','Mid']}, {id:'Milio',n:'Milio',r:['Support']}, {id:'MissFortune',n:'Miss Fortune',r:['ADC']},
-            {id:'Mordekaiser',n:'Mordekaiser',r:['Top']}, {id:'Morgana',n:'Morgana',r:['Support']}, {id:'Naafiri',n:'Naafiri',r:['Mid','Jungle']},
-            {id:'Nami',n:'Nami',r:['Support']}, {id:'Nasus',n:'Nasus',r:['Top']}, {id:'Nautilus',n:'Nautilus',r:['Support']},
-            {id:'Neeko',n:'Neeko',r:['Mid','Support']}, {id:'Nidalee',n:'Nidalee',r:['Jungle']}, {id:'Nilah',n:'Nilah',r:['ADC']},
-            {id:'Nocturne',n:'Nocturne',r:['Jungle']}, {id:'Nunu',n:'Nunu & Willump',r:['Jungle']}, {id:'Olaf',n:'Olaf',r:['Top']},
-            {id:'Orianna',n:'Orianna',r:['Mid']}, {id:'Ornn',n:'Ornn',r:['Top']}, {id:'Pantheon',n:'Pantheon',r:['Support']},
-            {id:'Poppy',n:'Poppy',r:['Support']}, {id:'Pyke',n:'Pyke',r:['Support']}, {id:'Qiyana',n:'Qiyana',r:['Mid']},
-            {id:'Quinn',n:'Quinn',r:['Top']}, {id:'Rakan',n:'Rakan',r:['Support']}, {id:'Rammus',n:'Rammus',r:['Jungle']},
-            {id:'RekSai',n:'RekSai',r:['Jungle']}, {id:'Rell',n:'Rell',r:['Support']}, {id:'Renata',n:'Renata Glasc',r:['Support']},
-            {id:'Renekton',n:'Renekton',r:['Top']}, {id:'Rengar',n:'Rengar',r:['Jungle']}, {id:'Riven',n:'Riven',r:['Top']},
-            {id:'Rumble',n:'Rumble',r:['Top']}, {id:'Ryze',n:'Ryze',r:['Mid']}, {id:'Samira',n:'Samira',r:['ADC']},
-            {id:'Sejuani',n:'Sejuani',r:['Jungle']}, {id:'Senna',n:'Senna',r:['Support','ADC']}, {id:'Seraphine',n:'Seraphine',r:['Support','Mid']},
-            {id:'Sett',n:'Sett',r:['Top',]}, {id:'Shaco',n:'Shaco',r:['Jungle','Support']}, {id:'Shen',n:'Shen',r:['Top','Jungle']},
-            {id:'Shyvana',n:'Shyvana',r:['Jungle']}, {id:'Singed',n:'Singed',r:['Top']}, {id:'Sion',n:'Sion',r:['Top']},
-            {id:'Sivir',n:'Sivir',r:['ADC']}, {id:'Skarner',n:'Skarner',r:['Jungle']}, {id:'Smolder',n:'Smolder',r:['ADC']},
-            {id:'Sona',n:'Sona',r:['Support']}, {id:'Soraka',n:'Soraka',r:['Support']}, {id:'Swain',n:'Swain',r:['Support','Mid']},
-            {id:'Sylas',n:'Sylas',r:['Mid','Jungle']}, {id:'Syndra',n:'Syndra',r:['Mid']}, {id:'TahmKench',n:'Tahm Kench',r:['Support','Top']},
-            {id:'Taliyah',n:'Taliyah',r:['Mid']}, {id:'Talon',n:'Talon',r:['Jungle']}, {id:'Taric',n:'Taric',r:['Support']},
-            {id:'Teemo',n:'Teemo',r:['Top']}, {id:'Thresh',n:'Thresh',r:['Support']}, {id:'Tristana',n:'Tristana',r:['ADC','Mid']},
-            {id:'Trundle',n:'Trundle',r:['Top']}, {id:'Tryndamere',n:'Tryndamere',r:['Top']}, {id:'TwistedFate',n:'Twisted Fate',r:['Mid']},
-            {id:'Twitch',n:'Twitch',r:['ADC']}, {id:'Udyr',n:'Udyr',r:['Jungle']}, {id:'Urgot',n:'Urgot',r:['Top']},
-            {id:'Varus',n:'Varus',r:['ADC','Mid']}, {id:'Vayne',n:'Vayne',r:['ADC','Top']}, {id:'Veigar',n:'Veigar',r:['Mid']},
-            {id:'Velkoz',n:'VelKoz',r:['Support','Mid']}, {id:'Vex',n:'Vex',r:['Mid']}, {id:'Vi',n:'Vi',r:['Jungle']},
-            {id:'Viego',n:'Viego',r:['Jungle']}, {id:'Viktor',n:'Viktor',r:['Mid']}, {id:'Vladimir',n:'Vladimir',r:['Mid']},
-            {id:'Volibear',n:'Volibear',r:['Top','Jungle']}, {id:'Warwick',n:'Warwick',r:['Jungle']}, {id:'Wukong',n:'Wukong',r:['Jungle']},
-            {id:'Xayah',n:'Xayah',r:['ADC']}, {id:'Xerath',n:'Xerath',r:['Support','Mid']}, {id:'XinZhao',n:'Xin Zhao',r:['Jungle']},
-            {id:'Yasuo',n:'Yasuo',r:['Mid','Top']}, {id:'Yone',n:'Yone',r:['Mid','Top']}, {id:'Yorick',n:'Yorick',r:['Top']},
-            {id:'Yuumi',n:'Yuumi',r:['Support']}, {id:'Yunara',n:'Yunara',r:['ADC']}, {id:'Zac',n:'Zac',r:['Jungle']},
-            {id:'Zed',n:'Zed',r:['Mid','Jungle']}, {id:'Zeri',n:'Zeri',r:['ADC']}, {id:'Ziggs',n:'Ziggs',r:['Mid','ADC']},
-            {id:'Zilean',n:'Zilean',r:['Support','Mid']}, {id:'Zoe',n:'Zoe',r:['Mid']}, {id:'Zyra',n:'Zyra',r:['Support']}
-        ];
+    const championsDB = [
+        {id:'Aatrox',n:'Aatrox',r:['Top']}, {id:'Ahri',n:'Ahri',r:['Mid']}, {id:'Akali',n:'Akali',r:['Mid','Top']},
+        {id:'Akshan',n:'Akshan',r:['Mid']}, {id:'Alistar',n:'Alistar',r:['Support']}, {id:'Ambessa',n:'Ambessa',r:['Top','Jungle']},
+        {id:'Amumu',n:'Amumu',r:['Jungle']}, {id:'Anivia',n:'Anivia',r:['Mid']}, {id:'Annie',n:'Annie',r:['Mid',]},
+        {id:'Aphelios',n:'Aphelios',r:['ADC']}, {id:'Ashe',n:'Ashe',r:['ADC',]}, {id:'AurelionSol',n:'Aurelion Sol',r:['Mid']},
+        {id:'Aurora',n:'Aurora',r:['Mid']}, {id:'Azir',n:'Azir',r:['Mid']}, {id:'Bard',n:'Bard',r:['Support']},
+        {id:'Belveth',n:'BelVeth',r:['Jungle']}, {id:'Blitzcrank',n:'Blitzcrank',r:['Support']}, {id:'Brand',n:'Brand',r:['Support']},
+        {id:'Braum',n:'Braum',r:['Support']}, {id:'Briar',n:'Briar',r:['Jungle']}, {id:'Caitlyn',n:'Caitlyn',r:['ADC']},
+        {id:'Camille',n:'Camille',r:['Top',]}, {id:'Cassiopeia',n:'Cassiopeia',r:['Mid']}, {id:'Chogath',n:'ChoGath',r:['Top']},
+        {id:'Corki',n:'Corki',r:['Mid','ADC']}, {id:'Darius',n:'Darius',r:['Top']}, {id:'Diana',n:'Diana',r:['Jungle','Mid']},
+        {id:'DrMundo',n:'Dr. Mundo',r:['Top','Jungle']}, {id:'Draven',n:'Draven',r:['ADC']}, {id:'Ekko',n:'Ekko',r:['Jungle','Mid']},
+        {id:'Elise',n:'Elise',r:['Jungle']}, {id:'Evelynn',n:'Evelynn',r:['Jungle']}, {id:'Ezreal',n:'Ezreal',r:['ADC']},
+        {id:'Fiddlesticks',n:'Fiddlesticks',r:['Jungle']}, {id:'Fiora',n:'Fiora',r:['Top']}, {id:'Fizz',n:'Fizz',r:['Mid']},
+        {id:'Galio',n:'Galio',r:['Mid',]}, {id:'Gangplank',n:'Gangplank',r:['Top']}, {id:'Garen',n:'Garen',r:['Top']},
+        {id:'Gnar',n:'Gnar',r:['Top']}, {id:'Gragas',n:'Gragas',r:['Top']}, {id:'Graves',n:'Graves',r:['Jungle']},
+        {id:'Gwen',n:'Gwen',r:['Top']}, {id:'Hecarim',n:'Hecarim',r:['Jungle']}, {id:'Heimerdinger',n:'Heimerdinger',r:['Mid','Top']},
+        {id:'Hwei',n:'Hwei',r:['Mid','Support']}, {id:'Illaoi',n:'Illaoi',r:['Top']}, {id:'Irelia',n:'Irelia',r:['Top','Mid']},
+        {id:'Ivern',n:'Ivern',r:['Jungle']}, {id:'Janna',n:'Janna',r:['Support']}, {id:'JarvanIV',n:'Jarvan IV',r:['Jungle']},
+        {id:'Jax',n:'Jax',r:['Top','Jungle']}, {id:'Jayce',n:'Jayce',r:['Top']}, {id:'Jhin',n:'Jhin',r:['ADC']},
+        {id:'Jinx',n:'Jinx',r:['ADC']}, {id:'KSante',n:'KSante',r:['Top']}, {id:'Kaisa',n:'KaiSa',r:['ADC']},
+        {id:'Kalista',n:'Kalista',r:['ADC']}, {id:'Karma',n:'Karma',r:['Support','Mid']}, {id:'Karthus',n:'Karthus',r:['Jungle']},
+        {id:'Kassadin',n:'Kassadin',r:['Mid']}, {id:'Katarina',n:'Katarina',r:['Mid']}, {id:'Kayle',n:'Kayle',r:['Top']},
+        {id:'Kayn',n:'Kayn',r:['Jungle']}, {id:'Kennen',n:'Kennen',r:['Top']}, {id:'Khazix',n:'KhaZix',r:['Jungle']},
+        {id:'Kindred',n:'Kindred',r:['Jungle']}, {id:'Kled',n:'Kled',r:['Top']}, {id:'KogMaw',n:'KogMaw',r:['ADC']},
+        {id:'Leblanc',n:'LeBlanc',r:['Mid']}, {id:'LeeSin',n:'Lee Sin',r:['Jungle']}, {id:'Leona',n:'Leona',r:['Support']},
+        {id:'Lillia',n:'Lillia',r:['Jungle']}, {id:'Lissandra',n:'Lissandra',r:['Mid']}, {id:'Lucian',n:'Lucian',r:['ADC']},
+        {id:'Lulu',n:'Lulu',r:['Support']}, {id:'Lux',n:'Lux',r:['Support','Mid']}, {id:'Malphite',n:'Malphite',r:['Top','Jungle']},
+        {id:'Malzahar',n:'Malzahar',r:['Mid']}, {id:'Maokai',n:'Maokai',r:['Support']}, {id:'MasterYi',n:'Master Yi',r:['Jungle']},
+        {id:'Mel',n:'Mel',r:['Support','Mid']}, {id:'Milio',n:'Milio',r:['Support']}, {id:'MissFortune',n:'Miss Fortune',r:['ADC']},
+        {id:'Mordekaiser',n:'Mordekaiser',r:['Top']}, {id:'Morgana',n:'Morgana',r:['Support']}, {id:'Naafiri',n:'Naafiri',r:['Mid','Jungle']},
+        {id:'Nami',n:'Nami',r:['Support']}, {id:'Nasus',n:'Nasus',r:['Top']}, {id:'Nautilus',n:'Nautilus',r:['Support']},
+        {id:'Neeko',n:'Neeko',r:['Mid','Support']}, {id:'Nidalee',n:'Nidalee',r:['Jungle']}, {id:'Nilah',n:'Nilah',r:['ADC']},
+        {id:'Nocturne',n:'Nocturne',r:['Jungle']}, {id:'Nunu',n:'Nunu & Willump',r:['Jungle']}, {id:'Olaf',n:'Olaf',r:['Top']},
+        {id:'Orianna',n:'Orianna',r:['Mid']}, {id:'Ornn',n:'Ornn',r:['Top']}, {id:'Pantheon',n:'Pantheon',r:['Support']},
+        {id:'Poppy',n:'Poppy',r:['Support']}, {id:'Pyke',n:'Pyke',r:['Support']}, {id:'Qiyana',n:'Qiyana',r:['Mid']},
+        {id:'Quinn',n:'Quinn',r:['Top']}, {id:'Rakan',n:'Rakan',r:['Support']}, {id:'Rammus',n:'Rammus',r:['Jungle']},
+        {id:'RekSai',n:'RekSai',r:['Jungle']}, {id:'Rell',n:'Rell',r:['Support']}, {id:'Renata',n:'Renata Glasc',r:['Support']},
+        {id:'Renekton',n:'Renekton',r:['Top']}, {id:'Rengar',n:'Rengar',r:['Jungle']}, {id:'Riven',n:'Riven',r:['Top']},
+        {id:'Rumble',n:'Rumble',r:['Top']}, {id:'Ryze',n:'Ryze',r:['Mid']}, {id:'Samira',n:'Samira',r:['ADC']},
+        {id:'Sejuani',n:'Sejuani',r:['Jungle']}, {id:'Senna',n:'Senna',r:['Support','ADC']}, {id:'Seraphine',n:'Seraphine',r:['Support','Mid']},
+        {id:'Sett',n:'Sett',r:['Top',]}, {id:'Shaco',n:'Shaco',r:['Jungle','Support']}, {id:'Shen',n:'Shen',r:['Top','Jungle']},
+        {id:'Shyvana',n:'Shyvana',r:['Jungle']}, {id:'Singed',n:'Singed',r:['Top']}, {id:'Sion',n:'Sion',r:['Top']},
+        {id:'Sivir',n:'Sivir',r:['ADC']}, {id:'Skarner',n:'Skarner',r:['Jungle']}, {id:'Smolder',n:'Smolder',r:['ADC']},
+        {id:'Sona',n:'Sona',r:['Support']}, {id:'Soraka',n:'Soraka',r:['Support']}, {id:'Swain',n:'Swain',r:['Support','Mid']},
+        {id:'Sylas',n:'Sylas',r:['Mid','Jungle']}, {id:'Syndra',n:'Syndra',r:['Mid']}, {id:'TahmKench',n:'Tahm Kench',r:['Support','Top']},
+        {id:'Taliyah',n:'Taliyah',r:['Mid']}, {id:'Talon',n:'Talon',r:['Jungle']}, {id:'Taric',n:'Taric',r:['Support']},
+        {id:'Teemo',n:'Teemo',r:['Top']}, {id:'Thresh',n:'Thresh',r:['Support']}, {id:'Tristana',n:'Tristana',r:['ADC','Mid']},
+        {id:'Trundle',n:'Trundle',r:['Top']}, {id:'Tryndamere',n:'Tryndamere',r:['Top']}, {id:'TwistedFate',n:'Twisted Fate',r:['Mid']},
+        {id:'Twitch',n:'Twitch',r:['ADC']}, {id:'Udyr',n:'Udyr',r:['Jungle']}, {id:'Urgot',n:'Urgot',r:['Top']},
+        {id:'Varus',n:'Varus',r:['ADC','Mid']}, {id:'Vayne',n:'Vayne',r:['ADC','Top']}, {id:'Veigar',n:'Veigar',r:['Mid']},
+        {id:'Velkoz',n:'VelKoz',r:['Support','Mid']}, {id:'Vex',n:'Vex',r:['Mid']}, {id:'Vi',n:'Vi',r:['Jungle']},
+        {id:'Viego',n:'Viego',r:['Jungle']}, {id:'Viktor',n:'Viktor',r:['Mid']}, {id:'Vladimir',n:'Vladimir',r:['Mid']},
+        {id:'Volibear',n:'Volibear',r:['Top','Jungle']}, {id:'Warwick',n:'Warwick',r:['Jungle']}, {id:'Wukong',n:'Wukong',r:['Jungle']},
+        {id:'Xayah',n:'Xayah',r:['ADC']}, {id:'Xerath',n:'Xerath',r:['Support','Mid']}, {id:'XinZhao',n:'Xin Zhao',r:['Jungle']},
+        {id:'Yasuo',n:'Yasuo',r:['Mid','Top']}, {id:'Yone',n:'Yone',r:['Mid','Top']}, {id:'Yorick',n:'Yorick',r:['Top']},
+        {id:'Yuumi',n:'Yuumi',r:['Support']}, {id:'Yunara',n:'Yunara',r:['ADC']}, {id:'Zac',n:'Zac',r:['Jungle']},
+        {id:'Zaahen',n:'Zaahen',r:['Top','Jungle']}, // <-- ZAAHEN ADICIONADO AQUI!
+        {id:'Zed',n:'Zed',r:['Mid','Jungle']}, {id:'Zeri',n:'Zeri',r:['ADC']}, {id:'Ziggs',n:'Ziggs',r:['Mid','ADC']},
+        {id:'Zilean',n:'Zilean',r:['Support','Mid']}, {id:'Zoe',n:'Zoe',r:['Mid']}, {id:'Zyra',n:'Zyra',r:['Support']}
+    ];
 
-        const challenges = [
-            "Jogar sem Flash", "Build flex (AP e AD)", "Maximizar a mesma skill até o level 6", 
-            "Não pode comprar botas antes dos 15 min", "Só pode jogar depois de morrer 10 vezes pro adversário",
-            "Jogar sem HUD por 10 minutos", "Focar apenas o suporte nas TFs", 
-            "Não pode usar a Ultimate nos primeiros 10 min", "Build full Attack Speed", 
-            "HUD com tudo no 100", "Trocar de lane com o aliado aos 10 min",
-            "Jogar sem som", "Flash trocado",
-            "Jogar sem usar Pings", "Build Tank independente do champ", "Fazer item da mesma cor",
-            "Mouse na mão esquerda, teclado na direita", "Não pode usar skills no Nv 1","Build Full Letalidade","Build Full Critico"
-        ];
+    const challenges = [
+        "Jogar sem Flash", "Build flex (AP e AD)", "Maximizar a mesma skill até o level 6", 
+        "Não pode comprar botas antes dos 15 min", "Só pode jogar depois de morrer 10 vezes pro adversário",
+        "Jogar sem HUD por 10 minutos", "Focar apenas o suporte nas TFs", 
+        "Não pode usar a Ultimate nos primeiros 10 min", "Build full Attack Speed", 
+        "HUD com tudo no 100", "Trocar de lane com o aliado aos 10 min",
+        "Jogar sem som", "Flash trocado",
+        "Jogar sem usar Pings", "Build Tank independente do champ", "Fazer item da mesma cor",
+        "Mouse na mão esquerda, teclado na direita", "Não pode usar skills no Nv 1","Build Full Letalidade","Build Full Critico"
+    ];
 
-        function getChampionImage(id) {
-            let cleanId = id.replace(/ /g, '').replace(/'/g, '').replace(/\./g, '');
-            if(cleanId === 'RenataGlasc') cleanId = 'Renata';
-            if(cleanId === 'Nunu&Willump') cleanId = 'Nunu';
-            if(cleanId === 'BelVeth') cleanId = 'Belveth';
-            return `https://ddragon.leagueoflegends.com/cdn/14.23.1/img/champion/${cleanId}.png`;
-        }
+    // Variável para guardar o patch mais recente (começa com um padrão, mas atualiza sozinho)
+    let latestPatch = "14.23.1"; 
 
-        let p1SelectedRole = null; 
-
-        // --- FUNÇÕES DE ANIMAÇÃO ---
-
-        // 1. Campeões (A-Z na fita)
-        function runRouletteAnimation(playerPrefix, winnerChamp, sortedPool) {
-            const strip = document.getElementById(`${playerPrefix}-strip`);
-            const nameDisplay = document.getElementById(`${playerPrefix}-result-name`);
+    // --- FUNÇÃO PARA PEGAR O PATCH ATUAL DA RIOT ---
+    async function fetchLatestPatch() {
+        try {
+            const response = await fetch('https://ddragon.leagueoflegends.com/api/versions.json');
+            const versions = await response.json();
+            latestPatch = versions[0]; // Pega sempre o patch mais novo
             
-            const totalVisualItems = 80; 
-            const winnerVisualIndex = 65; 
-            
-            const winnerIndexInPool = sortedPool.findIndex(c => c.id === winnerChamp.id);
-            
-            let rouletteItems = [];
-            for (let i = 0; i < totalVisualItems; i++) {
-                const distance = i - winnerVisualIndex;
-                let targetIndex = (winnerIndexInPool + distance) % sortedPool.length;
-                if (targetIndex < 0) targetIndex += sortedPool.length;
-                rouletteItems.push(sortedPool[targetIndex]);
-            }
-
-            strip.innerHTML = '';
-            strip.style.transition = 'none';
-            strip.style.transform = 'translateX(0px)';
-
-            rouletteItems.forEach(champ => {
-                const div = document.createElement('div');
-                div.className = 'champ-card';
-                div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
-                div.onerror = function() { this.style.backgroundColor = '#333'; this.innerText = '?'; };
-                strip.appendChild(div);
-            });
-
-            nameDisplay.innerText = "...";
-            nameDisplay.style.color = "var(--gold)";
-            nameDisplay.style.textShadow = "none";
-
-            // Calculo da largura do CARD DE CAMPEÃO (agora com box-sizing: border-box)
-            const cardWidth = 100; 
-            
-            const containerWidth = strip.parentElement.offsetWidth;
-            const centerOffset = (containerWidth / 2) - (cardWidth / 2);
-            const randomOffset = Math.floor(Math.random() * 20) - 10; 
-            const finalPosition = -((winnerVisualIndex * cardWidth) - centerOffset + randomOffset);
-
-            strip.offsetHeight; 
-
-            setTimeout(() => {
-                strip.style.transition = 'transform 5s cubic-bezier(0.1, 0.8, 0.1, 1)'; 
-                strip.style.transform = `translateX(${finalPosition}px)`;
-            }, 50);
-
-            setTimeout(() => {
-                const roleText = (playerPrefix === 'p1' && p1SelectedRole) ? p1SelectedRole : winnerChamp.r[0];
-                nameDisplay.innerText = `${winnerChamp.n} (${roleText})`;
-                nameDisplay.style.color = "#fff";
-                nameDisplay.style.textShadow = "0 0 15px var(--gold)";
-                setTimeout(() => {
-                    nameDisplay.style.color = "var(--gold)";
-                    nameDisplay.style.textShadow = "none";
-                }, 500);
-            }, 5000);
-        }
-
-        // 2. Desafios (Texto na fita)
-        function spinChallenge() {
-            const strip = document.getElementById('challenge-strip');
-            const nameDisplay = document.getElementById('challenge-result-name');
-            const btn = document.getElementById('btn-challenge');
-
-            btn.disabled = true;
-            
-            const winnerText = challenges[Math.floor(Math.random() * challenges.length)];
-            const winnerIndexInArr = challenges.indexOf(winnerText);
-
-            const totalVisualItems = 50; 
-            const winnerVisualIndex = 40; 
-
-            let rouletteItems = [];
-            for (let i = 0; i < totalVisualItems; i++) {
-                const distance = i - winnerVisualIndex;
-                let targetIndex = (winnerIndexInArr + distance) % challenges.length;
-                if (targetIndex < 0) targetIndex += challenges.length;
-                rouletteItems.push(challenges[targetIndex]);
-            }
-
-            strip.innerHTML = '';
-            strip.style.transition = 'none';
-            strip.style.transform = 'translateX(0px)';
-
-            rouletteItems.forEach(text => {
-                const div = document.createElement('div');
-                div.className = 'challenge-card';
-                div.innerText = text;
-                strip.appendChild(div);
-            });
-
-            nameDisplay.innerText = "...";
-            nameDisplay.style.color = "var(--gold)";
-
-            // Card Width 180 + margin 10 = 190 (border-box now applied)
-            const cardWidth = 190; 
-            
-            const containerWidth = strip.parentElement.offsetWidth;
-            const centerOffset = (containerWidth / 2) - (cardWidth / 2);
-            const randomOffset = Math.floor(Math.random() * 10) - 5; 
-            const finalPosition = -((winnerVisualIndex * cardWidth) - centerOffset + randomOffset);
-
-            strip.offsetHeight; 
-
-            setTimeout(() => {
-                strip.style.transition = 'transform 4s cubic-bezier(0.1, 0.8, 0.1, 1)'; 
-                strip.style.transform = `translateX(${finalPosition}px)`;
-            }, 50);
-
-            setTimeout(() => {
-                nameDisplay.innerText = winnerText;
-                nameDisplay.style.color = "#fff";
-                btn.disabled = false;
-            }, 4000);
-        }
-
-
-        // --- FUNÇÕES DE CONTROLE ---
-
-        // ROLETA 1
-        function spinLaneP1() {
-            const roles = ['Top', 'Jungle', 'Mid', 'ADC', 'Support'];
-            const winnerRole = roles[Math.floor(Math.random() * roles.length)];
-            
-            document.getElementById('btn-p1-lane').disabled = true;
-            document.getElementById('btn-p1-champ').disabled = true;
-            document.getElementById('p1-result-name').innerText = "";
-
-            const totalCycles = 3; 
-            const intervalSpeed = 100;
-            const container = document.getElementById('p1-role-container');
-            roles.forEach(r => document.getElementById(`p1-${r}`).classList.remove('active-highlight'));
-
-            let currentIndex = 0;
-            let currentCycle = 0;
-
-            const interval = setInterval(() => {
-                const prevIndex = (currentIndex === 0) ? 4 : currentIndex - 1;
-                document.getElementById(`p1-${roles[prevIndex]}`).classList.remove('active-highlight');
-
-                const currentRoleName = roles[currentIndex];
-                document.getElementById(`p1-${currentRoleName}`).classList.add('active-highlight');
-
-                if (currentCycle >= totalCycles && currentRoleName === winnerRole) {
-                    clearInterval(interval);
-                    document.getElementById(`p1-${winnerRole}`).classList.add('active-highlight');
-                    p1SelectedRole = winnerRole;
-                    
-                    document.getElementById('btn-p1-lane').disabled = false;
-                    document.getElementById('btn-p1-champ').disabled = false;
-                    document.getElementById('btn-p1-champ').innerText = `Sortear Campeão`;
-                } else {
-                    currentIndex++;
-                    if (currentIndex >= roles.length) {
-                        currentIndex = 0;
-                        currentCycle++;
-                    }
-                }
-            }, intervalSpeed);
-        }
-
-        function spinChampionP1() {
-            if (!p1SelectedRole) {
-                alert("Sorteie a rota primeiro!");
-                return;
-            }
-            const winner = championsDB[Math.floor(Math.random() * championsDB.length)];
-            runRouletteAnimation('p1', winner, championsDB);
-        }
-
-        // ROLETA 2 - MULTIPLAS ROTAS
-        function spinPlayer2() {
-            // Pega todos os checkboxes marcados
-            const checkboxes = document.querySelectorAll('#p2-roles .role-input:checked');
-            const selectedRoles = Array.from(checkboxes).map(cb => cb.value);
-
-            if (selectedRoles.length === 0) {
-                alert("Selecione pelo menos uma rota!");
-                return;
-            }
-            
-            // Filtra o banco: Se o campeão tem ALGUMA das rotas selecionadas
-            let pool = championsDB.filter(champ => 
-                champ.r.some(role => selectedRoles.includes(role))
-            );
-
-            // Se nada for encontrado (improvável), usa tudo
-            if(pool.length === 0) pool = championsDB;
-            
-            const winner = pool[Math.floor(Math.random() * pool.length)];
-            
-            // Roda a animação com a pool filtrada (que mantém ordem A-Z do DB)
-            runRouletteAnimation('p2', winner, pool);
-        }
-
-        function updatePlayer2StaticStrip() {
-            const checkboxes = document.querySelectorAll('#p2-roles .role-input:checked');
-            const selectedRoles = Array.from(checkboxes).map(cb => cb.value);
-            
-            const strip = document.getElementById('p2-strip');
-            const nameDisplay = document.getElementById('p2-result-name');
-
-            nameDisplay.innerText = "";
-            
-            // Se nenhuma rota selecionada, limpa a fita
-            if (selectedRoles.length === 0) {
-                strip.innerHTML = '';
-                return;
-            }
-
-            // Filtro Multi-Rotas
-            let pool = championsDB.filter(champ => 
-                champ.r.some(role => selectedRoles.includes(role))
-            );
-
-            if (pool.length === 0) return;
-
-            strip.innerHTML = '';
-            strip.style.transition = 'none';
-            strip.style.transform = 'translateX(0px)';
-
-            for(let i=0; i<15; i++) {
-                const champ = pool[i % pool.length];
-                const div = document.createElement('div');
-                div.className = 'champ-card';
-                div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
-                strip.appendChild(div);
-            }
-        }
-
-        function initStaticStripP1() {
-            const strip = document.getElementById('p1-strip');
-            for(let i=0; i<15; i++) {
-                const champ = championsDB[i];
-                const div = document.createElement('div');
-                div.className = 'champ-card';
-                div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
-                strip.appendChild(div);
-            }
-        }
-
-        function initStaticChallenge() {
-            const strip = document.getElementById('challenge-strip');
-            for(let i=0; i<10; i++) {
-                const text = challenges[i % challenges.length];
-                const div = document.createElement('div');
-                div.className = 'challenge-card';
-                div.innerText = text;
-                strip.appendChild(div);
-            }
-        }
-
-        window.onload = () => {
+            // Depois de pegar o patch atualizado, renderiza as imagens
             initStaticStripP1(); 
             updatePlayer2StaticStrip();
             initStaticChallenge();
-        };
+        } catch (error) {
+            console.error("Erro ao buscar a versão. Usando versão de fallback.", error);
+            initStaticStripP1(); 
+            updatePlayer2StaticStrip();
+            initStaticChallenge();
+        }
+    }
 
-    </script>
+    // --- FUNÇÃO DE IMAGEM ATUALIZADA ---
+    function getChampionImage(id) {
+        let cleanId = id.replace(/ /g, '').replace(/'/g, '').replace(/\./g, '');
+        if(cleanId === 'RenataGlasc') cleanId = 'Renata';
+        if(cleanId === 'Nunu&Willump') cleanId = 'Nunu';
+        if(cleanId === 'BelVeth') cleanId = 'Belveth';
+        
+        // Agora usa a variável `latestPatch` no link!
+        return `https://ddragon.leagueoflegends.com/cdn/${latestPatch}/img/champion/${cleanId}.png`;
+    }
+
+    let p1SelectedRole = null; 
+
+    // --- FUNÇÕES DE ANIMAÇÃO ---
+
+    function runRouletteAnimation(playerPrefix, winnerChamp, sortedPool) {
+        const strip = document.getElementById(`${playerPrefix}-strip`);
+        const nameDisplay = document.getElementById(`${playerPrefix}-result-name`);
+        
+        const totalVisualItems = 80; 
+        const winnerVisualIndex = 65; 
+        
+        const winnerIndexInPool = sortedPool.findIndex(c => c.id === winnerChamp.id);
+        
+        let rouletteItems = [];
+        for (let i = 0; i < totalVisualItems; i++) {
+            const distance = i - winnerVisualIndex;
+            let targetIndex = (winnerIndexInPool + distance) % sortedPool.length;
+            if (targetIndex < 0) targetIndex += sortedPool.length;
+            rouletteItems.push(sortedPool[targetIndex]);
+        }
+
+        strip.innerHTML = '';
+        strip.style.transition = 'none';
+        strip.style.transform = 'translateX(0px)';
+
+        rouletteItems.forEach(champ => {
+            const div = document.createElement('div');
+            div.className = 'champ-card';
+            div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
+            div.onerror = function() { this.style.backgroundColor = '#333'; this.innerText = '?'; };
+            strip.appendChild(div);
+        });
+
+        nameDisplay.innerText = "...";
+        nameDisplay.style.color = "var(--gold)";
+        nameDisplay.style.textShadow = "none";
+
+        const cardWidth = 100; 
+        
+        const containerWidth = strip.parentElement.offsetWidth;
+        const centerOffset = (containerWidth / 2) - (cardWidth / 2);
+        const randomOffset = Math.floor(Math.random() * 20) - 10; 
+        const finalPosition = -((winnerVisualIndex * cardWidth) - centerOffset + randomOffset);
+
+        strip.offsetHeight; 
+
+        setTimeout(() => {
+            strip.style.transition = 'transform 5s cubic-bezier(0.1, 0.8, 0.1, 1)'; 
+            strip.style.transform = `translateX(${finalPosition}px)`;
+        }, 50);
+
+        setTimeout(() => {
+            const roleText = (playerPrefix === 'p1' && p1SelectedRole) ? p1SelectedRole : winnerChamp.r[0];
+            nameDisplay.innerText = `${winnerChamp.n} (${roleText})`;
+            nameDisplay.style.color = "#fff";
+            nameDisplay.style.textShadow = "0 0 15px var(--gold)";
+            setTimeout(() => {
+                nameDisplay.style.color = "var(--gold)";
+                nameDisplay.style.textShadow = "none";
+            }, 500);
+        }, 5000);
+    }
+
+    function spinChallenge() {
+        const strip = document.getElementById('challenge-strip');
+        const nameDisplay = document.getElementById('challenge-result-name');
+        const btn = document.getElementById('btn-challenge');
+
+        btn.disabled = true;
+        
+        const winnerText = challenges[Math.floor(Math.random() * challenges.length)];
+        const winnerIndexInArr = challenges.indexOf(winnerText);
+
+        const totalVisualItems = 50; 
+        const winnerVisualIndex = 40; 
+
+        let rouletteItems = [];
+        for (let i = 0; i < totalVisualItems; i++) {
+            const distance = i - winnerVisualIndex;
+            let targetIndex = (winnerIndexInArr + distance) % challenges.length;
+            if (targetIndex < 0) targetIndex += challenges.length;
+            rouletteItems.push(challenges[targetIndex]);
+        }
+
+        strip.innerHTML = '';
+        strip.style.transition = 'none';
+        strip.style.transform = 'translateX(0px)';
+
+        rouletteItems.forEach(text => {
+            const div = document.createElement('div');
+            div.className = 'challenge-card';
+            div.innerText = text;
+            strip.appendChild(div);
+        });
+
+        nameDisplay.innerText = "...";
+        nameDisplay.style.color = "var(--gold)";
+
+        const cardWidth = 190; 
+        
+        const containerWidth = strip.parentElement.offsetWidth;
+        const centerOffset = (containerWidth / 2) - (cardWidth / 2);
+        const randomOffset = Math.floor(Math.random() * 10) - 5; 
+        const finalPosition = -((winnerVisualIndex * cardWidth) - centerOffset + randomOffset);
+
+        strip.offsetHeight; 
+
+        setTimeout(() => {
+            strip.style.transition = 'transform 4s cubic-bezier(0.1, 0.8, 0.1, 1)'; 
+            strip.style.transform = `translateX(${finalPosition}px)`;
+        }, 50);
+
+        setTimeout(() => {
+            nameDisplay.innerText = winnerText;
+            nameDisplay.style.color = "#fff";
+            btn.disabled = false;
+        }, 4000);
+    }
+
+    // --- FUNÇÕES DE CONTROLE ---
+
+    function spinLaneP1() {
+        const roles = ['Top', 'Jungle', 'Mid', 'ADC', 'Support'];
+        const winnerRole = roles[Math.floor(Math.random() * roles.length)];
+        
+        document.getElementById('btn-p1-lane').disabled = true;
+        document.getElementById('btn-p1-champ').disabled = true;
+        document.getElementById('p1-result-name').innerText = "";
+
+        const totalCycles = 3; 
+        const intervalSpeed = 100;
+        const container = document.getElementById('p1-role-container');
+        roles.forEach(r => document.getElementById(`p1-${r}`).classList.remove('active-highlight'));
+
+        let currentIndex = 0;
+        let currentCycle = 0;
+
+        const interval = setInterval(() => {
+            const prevIndex = (currentIndex === 0) ? 4 : currentIndex - 1;
+            document.getElementById(`p1-${roles[prevIndex]}`).classList.remove('active-highlight');
+
+            const currentRoleName = roles[currentIndex];
+            document.getElementById(`p1-${currentRoleName}`).classList.add('active-highlight');
+
+            if (currentCycle >= totalCycles && currentRoleName === winnerRole) {
+                clearInterval(interval);
+                document.getElementById(`p1-${winnerRole}`).classList.add('active-highlight');
+                p1SelectedRole = winnerRole;
+                
+                document.getElementById('btn-p1-lane').disabled = false;
+                document.getElementById('btn-p1-champ').disabled = false;
+                document.getElementById('btn-p1-champ').innerText = `Sortear Campeão`;
+            } else {
+                currentIndex++;
+                if (currentIndex >= roles.length) {
+                    currentIndex = 0;
+                    currentCycle++;
+                }
+            }
+        }, intervalSpeed);
+    }
+
+    function spinChampionP1() {
+        if (!p1SelectedRole) {
+            alert("Sorteie a rota primeiro!");
+            return;
+        }
+        const winner = championsDB[Math.floor(Math.random() * championsDB.length)];
+        runRouletteAnimation('p1', winner, championsDB);
+    }
+
+    function spinPlayer2() {
+        const checkboxes = document.querySelectorAll('#p2-roles .role-input:checked');
+        const selectedRoles = Array.from(checkboxes).map(cb => cb.value);
+
+        if (selectedRoles.length === 0) {
+            alert("Selecione pelo menos uma rota!");
+            return;
+        }
+        
+        let pool = championsDB.filter(champ => 
+            champ.r.some(role => selectedRoles.includes(role))
+        );
+
+        if(pool.length === 0) pool = championsDB;
+        
+        const winner = pool[Math.floor(Math.random() * pool.length)];
+        runRouletteAnimation('p2', winner, pool);
+    }
+
+    function updatePlayer2StaticStrip() {
+        const checkboxes = document.querySelectorAll('#p2-roles .role-input:checked');
+        const selectedRoles = Array.from(checkboxes).map(cb => cb.value);
+        
+        const strip = document.getElementById('p2-strip');
+        const nameDisplay = document.getElementById('p2-result-name');
+
+        nameDisplay.innerText = "";
+        
+        if (selectedRoles.length === 0) {
+            strip.innerHTML = '';
+            return;
+        }
+
+        let pool = championsDB.filter(champ => 
+            champ.r.some(role => selectedRoles.includes(role))
+        );
+
+        if (pool.length === 0) return;
+
+        strip.innerHTML = '';
+        strip.style.transition = 'none';
+        strip.style.transform = 'translateX(0px)';
+
+        for(let i=0; i<15; i++) {
+            const champ = pool[i % pool.length];
+            const div = document.createElement('div');
+            div.className = 'champ-card';
+            div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
+            strip.appendChild(div);
+        }
+    }
+
+    function initStaticStripP1() {
+        const strip = document.getElementById('p1-strip');
+        strip.innerHTML = ''; // Limpa antes para não duplicar
+        for(let i=0; i<15; i++) {
+            const champ = championsDB[i];
+            const div = document.createElement('div');
+            div.className = 'champ-card';
+            div.style.backgroundImage = `url('${getChampionImage(champ.id)}')`;
+            strip.appendChild(div);
+        }
+    }
+
+    function initStaticChallenge() {
+        const strip = document.getElementById('challenge-strip');
+        strip.innerHTML = ''; // Limpa antes para não duplicar
+        for(let i=0; i<10; i++) {
+            const text = challenges[i % challenges.length];
+            const div = document.createElement('div');
+            div.className = 'challenge-card';
+            div.innerText = text;
+            strip.appendChild(div);
+        }
+    }
+
+    // --- CARREGAMENTO INICIAL ALTERADO ---
+    // Agora ele chama a função que busca o patch primeiro.
+    window.onload = () => {
+        fetchLatestPatch();
+    };
+
+</script>
 </body>
 </html>
