@@ -298,6 +298,15 @@
             text-shadow: 0 2px 5px rgba(0,0,0,0.9); 
         }
 
+        .dev-text a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .dev-text a:hover {
+            color: var(--gold);
+        }
         .quote-text {
             color: #ccc; 
             font-family: 'Roboto', sans-serif;
@@ -416,7 +425,9 @@
 
     <!-- O rodapé agora fica fora do script, antes de fechar o body -->
     <footer class="creditos">
-        <a href="https://www.youtube.com/watch?v=RXKabdUBiWM" target="_blank">Desenvolvido por Pedroka Formigão</a>
+        <p class="dev-text">
+    <a href="https://www.youtube.com/watch?v=RXKabdUBiWM" target="_blank">Desenvolvido por Pedroka Formigão</a>
+</p>
         <p class="quote-text">Eu sou louco, o chat é louco, mas somos uma família!</p>
     </footer>
 
