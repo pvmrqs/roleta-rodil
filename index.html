@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rodeleta</title>
-    <!-- Link do Font Awesome arrumado (FORA do style) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -26,7 +25,6 @@
 
         body {
             background-color: var(--bg-color);
-            /* Substitua pelo nome da sua imagem */
             background-image: url('fundo_site_links.jpg'); 
             background-size: cover;
             background-position: center center;
@@ -81,7 +79,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding-top: 80px;
+            padding-top: 50px; /* Dei uma leve ajustada aqui para caber melhor o ícone */
         }
 
         /* --- Seleção de Rotas --- */
@@ -307,6 +305,7 @@
         .dev-text a:hover {
             color: var(--gold);
         }
+
         .quote-text {
             color: #ccc; 
             font-family: 'Roboto', sans-serif;
@@ -314,6 +313,14 @@
             font-style: italic; 
             margin: 0;
             text-shadow: 0 2px 5px rgba(0,0,0,0.9);
+        }
+
+        /* --- Ícone do Shaco Centralizado --- */
+        .challenge-icon {
+            width: 100px; /* Altere aqui se achar que ficou muito grande ou pequeno */
+            height: auto;
+            margin-bottom: 5px; /* Dá um respiro entre o ícone e a palavra "Desafios" */
+            filter: drop-shadow(0 0 10px rgba(200, 170, 110, 0.4)); /* Dá uma leve aura dourada na imagem */
         }
     </style>
 </head>
@@ -362,6 +369,8 @@
         </div>
 
         <div class="center-section">
+            <img src="shaco-icon.png" alt="Ícone Shaco" class="challenge-icon">
+            
             <h3>Desafios</h3>
             
             <div class="result-name" id="challenge-result-name" style="height: 35px;"></div>
@@ -423,11 +432,10 @@
         
     </div>
 
-    <!-- O rodapé agora fica fora do script, antes de fechar o body -->
     <footer class="creditos">
         <p class="dev-text">
-    <a href="https://www.youtube.com/watch?v=RXKabdUBiWM" target="_blank">Desenvolvido por Pedroka Formigão</a>
-</p>
+            <a href="https://www.youtube.com/watch?v=RXKabdUBiWM" target="_blank">Desenvolvido por Pedroka Formigão</a>
+        </p>
         <p class="quote-text">Eu sou louco, o chat é louco, mas somos uma família!</p>
     </footer>
 
